@@ -25,11 +25,33 @@ public class ThemeService {
         return themeRepository.findAll();
     }
 
+
     public void delete(Long id) {
         Optional<Theme> toDelete = themeRepository.findById(id);
         if (toDelete.isPresent()) {
             themeRepository.delete(toDelete.get());
         }
+    }
+
+    public Theme update(Theme theme) {
+
+        Optional<Theme> themeOp = themeRepository.findById(theme.getId());
+        if (themeOp.isPresent()) {
+            Theme newTheme = themeOp.get();
+            newTheme.setName(theme.getName());
+            newTheme.setDescription(theme.getDescription());
+            newTheme = themeRepository.save(newTheme);
+
+            return newTheme;
+        } else {
+            theme = themeRepository.save(theme);
+
+            return theme;
+        }
+    }
+
+    public Theme findThemeById(long id) {
+        return themeRepository.findThemeById(id);
     }
 
     public Theme create(Theme theme) {

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Comment</title>
+</head>
+<div align="center">
+    <body>
+    <h1>Створення коментаря:</h1>
+
+    <form th:action="@{/topic/addComment/__${comment.topic.id}__}"
+          th:object="${comment}" method="POST">
+        NameTopic:
+        <a th:text="${comment.topic.name}">
+        </a>
+<!--        User:-->
+<!--        <a th:text="${comment.user.firstName}">-->
+<!--        </a>-->
+        Description:
+        <input type="text" th:field="*{description}"/>
+
+        <a th:href="@{/topic/addComment/__${comment.topic.id}__}"></a>
+        <!--        <input type="text" th:field="*{getTheme()}"/>-->
+
+        <input type="submit" value="Create"/>
+
+    </form>
+
+    <br/>
+    </body>
+</div>

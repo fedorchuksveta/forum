@@ -1,18 +1,14 @@
 package com.forum.repository;
 
-import com.forum.model.Topic;
+import com.forum.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
-public interface TopicRepository extends JpaRepository<Topic, Long> {
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    List<Topic> findByThemeId(Long id);
-
-    Topic findTopicById(long id);
-
+    List<Comment> findByTopicId(Long id);
 }
 

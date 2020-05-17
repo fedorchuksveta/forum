@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit theme</title>
+</head>
+<body>
+
+<div class="container my-5">
+    <h3> Change theme</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#" th:action="@{/theme/editTheme}" th:object="${theme}"
+                      method="post">
+                    <div class="row">
+                        <div class="form-group col-md-8">
+                            <label for="name" class="col-form-label">Name</label>
+                            <input type="text" th:field="*{name}" class="form-control"
+                                   id="name" placeholder="Ім'я"/>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="description" class="col-form-label">description</label>
+                            <input type="text" th:field="*{description}" class="form-control"
+                                   id="description" placeholder="Опис"/>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-primary" value=" Підвердити ">
+                        </div>
+
+                        <input type="hidden" id="id" th:field="*{id}">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</body>
+</html>

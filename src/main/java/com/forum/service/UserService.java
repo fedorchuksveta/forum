@@ -1,17 +1,14 @@
 package com.forum.service;
 
 
-import com.forum.model.Theme;
 import com.forum.model.User;
 import com.forum.repository.ThemeRepository;
 import com.forum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 
 @Service
@@ -41,6 +38,10 @@ public class UserService {
 
     public User create(User user) {
         return userRepository.save(user);
+    }
+
+    public User findUserByFirstName(String name) {
+        return userRepository.findUserByFirstName(name);
     }
 
 //    private Set<Theme> resolveTheme(Set<Theme> themes) {

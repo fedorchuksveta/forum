@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Theme's page</title>
+</head>
+<div align="center">
+    <table border="2" cellpadding="5">
+        <thead>
+        <th>Найменування теми</th>
+        </thead>
+
+        <tbody>
+
+        <tr th:if="${themes.isEmpty()}">
+            <td colspan="2"> Немає створених тем</td>
+        </tr>
+
+        <tr th:each="t : ${themes}">
+            <td th:text="${t.name}"></td>
+
+            <td>
+                <a th:href="@{/theme/editTheme/__${t.id}__}" class="btn btn-danger">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{/theme/deleteTheme/__${t.id}__}" class="btn btn-danger">Delete</a>
+            </td>
+            <td>
+                <a th:href="@{/theme/topicTheme/__${t.id}__}" class="btn btn-danger">Go</a>
+            </td>
+        </tr>
+
+        <input type="button" onclick="location.href='/theme/addTheme';" value="Додати тему"/>
+
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+
+

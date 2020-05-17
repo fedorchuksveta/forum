@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Theme</title>
+</head>
+<div align="center">
+    <body>
+    <h1>Створення теми:</h1>
+
+    <form th:action="@{/theme/addTheme}"
+          th:object="${theme}" method="POST">
+        Name:
+        <input type="text" th:field="*{name}"/>
+        <br/>
+        Description:
+        <input type="text" th:field="*{description}"/>
+
+        <input type="submit" value="Create"/>
+
+    </form>
+
+    <br/>
+    </body>
+</div>
+</html>

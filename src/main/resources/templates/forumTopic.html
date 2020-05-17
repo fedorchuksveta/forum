@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Forums's page</title>
+</head>
+<div align="center">
+    <table border="2" cellpadding="5">
+        <thead>
+        <th>Найменування топіка</th>
+        </thead>
+
+        <tbody>
+
+        <tr th:if="${comments.isEmpty()}">
+            <td colspan="2"> Немає коментарів</td>
+        </tr>
+
+        <tr th:each="c : ${comments}">
+            <td th:text="${c.name}"></td>
+
+<!--            <td>-->
+<!--                <a th:href="@{/topic/topic/__${t.id}__}" class="btn btn-danger">Перейти до обговорення</a>-->
+<!--            </td>-->
+        </tr>
+
+        <a th:href="@{/topic/addComment/__${topicId}__}" class="btn btn-danger">Додати коментар</a>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

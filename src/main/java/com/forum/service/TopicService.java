@@ -1,8 +1,6 @@
 package com.forum.service;
 
-import com.forum.model.Theme;
 import com.forum.model.Topic;
-import com.forum.repository.ThemeRepository;
 import com.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +14,9 @@ public class TopicService {
     @Autowired
     TopicRepository topicRepository;
 
+    public List<Topic> findAllByTheme(long id) {
+        return topicRepository.findByThemeId(id);
+    }
 
     public Topic getOne(Long id) {
         return topicRepository.findById(id).orElse(null);
@@ -30,6 +31,10 @@ public class TopicService {
         if (toDelete.isPresent()) {
             topicRepository.delete(toDelete.get());
         }
+    }
+
+    public Topic findTopicById(long id) {
+        return topicRepository.findTopicById(id);
     }
 
     public Topic create(Topic topic) {

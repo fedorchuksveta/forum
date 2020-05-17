@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -17,6 +18,7 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String name;
     private String description;
 
     @ManyToOne
@@ -30,4 +32,6 @@ public class Topic {
     @ManyToMany(mappedBy = "topicSet")
     private Set<User> userSet;
 
+    @OneToMany(mappedBy="topic")
+    private List<Comment> commentList;
 }

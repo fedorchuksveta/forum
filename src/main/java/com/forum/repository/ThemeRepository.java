@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ThemeRepository extends JpaRepository<Theme, Long> {
-
+    
+    Theme findThemeById(long id);
     Theme findByName(String name);
 }
 

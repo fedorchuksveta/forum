@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -34,5 +35,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "theme_id"))
     private Set<Theme> themeSet;
 
-
+    @OneToMany(mappedBy="user")
+    private List<Comment> commentList;
 }

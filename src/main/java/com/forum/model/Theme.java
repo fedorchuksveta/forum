@@ -17,7 +17,6 @@ public class Theme {
     private Long id;
 
     private String description;
-    private String schedule;
     private String name;
 
 
