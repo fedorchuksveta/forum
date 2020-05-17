@@ -13,11 +13,12 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
     private String surName;
+    private String nickName;
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)

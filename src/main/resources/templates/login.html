@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--<div align="center">-->
+<!--    <div class="container">-->
+<!--&lt;!&ndash;        <img th:src="@{/images/petShopLogo.png}" class="img-responsive center-block" width="300" height="263" alt="Logo" />&ndash;&gt;-->
+<!--        <form th:action="@{/login}" method="POST" class="form-signin">-->
+<!--            <h3 class="form-signin-heading" th:text="Welcome"></h3>-->
+<!--            <br/>-->
+
+<!--            <input type="text" id="nickName" name="nickName"  th:placeholder="NickName"-->
+<!--                   class="form-control" /> <br/>-->
+<!--            <input type="password"  th:placeholder="Password"-->
+<!--                   id="password" name="password" class="form-control" /> <br />-->
+
+<!--            <div align="center" th:if="${param.error}">-->
+<!--                <p style="font-size: 20px; color: #FF1C19;">NickName or Password invalid, please verify</p>-->
+<!--            </div>-->
+<!--            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="container-wrapper">
+    <div class="login-container">
+        <div id="login-box">
+
+<!--           <span sec:authorize="isAuthenticated()">| Logged user: <span sec:authentication="name"></span> |-->
+<!--                Roles: <span sec:authentication="principal.authorities"></span> |-->
+<!--                <a th:href="@{/logout}">Sign Out</a>-->
+<!--            </span>-->
+            <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        </div>
+
+
+        <div class="container">
+
+            <div class="row" style="margin-top:20px">
+                <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                    <form th:action="@{/login}" method="post">
+                        <fieldset>
+                            <h1>Please Sign In</h1>
+
+                            <div th:if="${param.error}">
+                                <div class="alert alert-danger">
+                                    Invalid username and password.
+                                </div>
+                            </div>
+                            <div th:if="${param.logout}">
+                                <div class="alert alert-info">
+                                    You have been logged out.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="nickName" id="nickName" class="form-control input-lg"
+                                       placeholder="NickName" required="true" autofocus="true"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" class="form-control input-lg"
+                                       placeholder="Password" required="true"/>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In"/>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
