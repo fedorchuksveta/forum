@@ -3,6 +3,7 @@ package com.forum.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,8 +31,10 @@ public class Topic {
 //    private Theme theme;
 
     @ManyToMany(mappedBy = "topicSet")
+    @ToString.Exclude
     private Set<User> userSet;
 
     @OneToMany(mappedBy="topic")
+    @ToString.Exclude
     private List<Comment> commentList;
 }

@@ -2,6 +2,7 @@ package com.forum.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -19,10 +20,12 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
+    @ToString.Exclude
     private User user;
 
     @ManyToOne
     @JoinColumn(name="topic_id", nullable=false)
+    @ToString.Exclude
     private Topic topic;
 
 }

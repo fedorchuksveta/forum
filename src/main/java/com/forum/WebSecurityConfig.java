@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 .and()
                 .csrf().disable()
                 .formLogin().loginPage("/login").permitAll()
-                .defaultSuccessUrl("/presentation", true)
+                .defaultSuccessUrl("/theme/themePage", true)
                 .failureUrl("/login?error=True")
                 .usernameParameter("username")
                 .passwordParameter("password")

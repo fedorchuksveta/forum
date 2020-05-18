@@ -11,8 +11,5 @@ import java.util.List;
 public interface TopicRepository extends JpaRepository<Topic, Long> {
 
     List<Topic> findByThemeId(Long id);
-
-    Topic findTopicById(long id);
-
 }
 
