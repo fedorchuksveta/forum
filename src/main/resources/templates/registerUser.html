@@ -1,37 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:form="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-<!--    <title>Register User</title>-->
-<!--    <div class="container-wrapper">-->
-<!--        <div class="container">-->
-<!--            <div class="page-header">-->
-<!--                <div align="center">-->
-<!--                    <h1>Реєстрація користувача</h1>-->
-<!--                    <p class="lead">Будь ласка, вкажіть свої дані:</p>-->
 
-
-<!--                <div class="form-group">-->
-<!--                    <label for="first_name">Ім'я</label>-->
-<!--<form:errors path="userName" cssStyle="color: #ff0000"/>-->
-<!--<form:input path="userName" id="first_name" class="form-Control"/>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--    <label for="sur_name">Прізвище</label>-->
-<!--    <form:errors path="userName" cssStyle="color: #ff0000"/>-->
-<!--    <form:input path="userName" id="sur_name" class="form-Control"/>-->
-<!--</div>-->
-
-<!--<div class="form-group">-->
-<!--    <label for="password">Пароль</label>-->
-
-<!--    <form:errors path="password" cssStyle="color: #ff0000"/>-->
-<!--    <form:password path="password" id="password" class="form-Control"/>-->
-<!--</div>-->
-
-<!--</div>-->
-<!--</div>-->
 <body>
 
 <div class="container">
@@ -41,29 +12,38 @@
                   autocomplete="off" action="#" th:action="@{/registration}"
                   th:object="${user}" method="post" class="form-horizontal"
                   role="form">
-                <h2>Registration Form</h2>
+                <h2>Реєстрація</h2>
                 <div class="form-group">
                     <div class="col-sm-9">
                         <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
                                class="validation-message"></label>
                         <input type="text" th:field="*{firstName}" placeholder="First name"
-                               class="form-control" />
+                               class="form-control"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-9">
-                        <label	th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}"
-                                  class="validation-message"></label>
+                        <label th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}"
+                               class="validation-message"></label>
                         <input type="text" th:field="*{surName}"
-                               placeholder="Second name" class="form-control" />
+                               placeholder="Second name" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                               class="validation-message"></label>
+                        <input type="text" th:field="*{username}"
+                               placeholder="Nick name" class="form-control"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-9">
                         <input id="pass" type="password" th:field="*{password}"
-                               placeholder="Password" class="form-control" />
+                               placeholder="Password" class="form-control"/>
                         <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
                                class="validation-message">
                         </label>
@@ -73,11 +53,10 @@
                 <div class="form-group">
                     <div class="col-sm-9">
                         <input id="pass_confirmation" type="password"
-                               placeholder="Confirmation Password " class="form-control" />
+                               placeholder="Confirmation Password " class="form-control"/>
                         <label id="mess_pass" hidden class="validation-message">The password is incorrect</label>
                     </div>
                 </div>
-
 
 
                 <div class="form-group">
@@ -85,7 +64,8 @@
                         <button id="btn_submit"
                                 type="button"
                                 class="btn btn-primary btn-block"
-                                onclick="confirmationPass();">Register User</button>
+                                onclick="confirmationPass();">Register User
+                        </button>
                     </div>
                 </div>
 
@@ -103,9 +83,8 @@
     var mess_pass = document.getElementById("mess_pass");
 
     function confirmationPass() {
-        if (password.value == password_confirmation.value){
+        if (password.value === password_confirmation.value) {
             btn_submit.type = "submit";
-            btn_submit.click();
         } else {
             mess_pass.hidden = false;
         }

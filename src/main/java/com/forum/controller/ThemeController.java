@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,11 @@ public class ThemeController {
                                    @ModelAttribute("theme") Theme theme) {
         themeService.create(theme);
         return "redirect:/theme/themePage";
+    }
+
+    @GetMapping("{id}")
+    public Theme getOne(@PathVariable Long id) {
+        return themeService.getOne(id);
     }
 
     @GetMapping("/editTheme/{id}")
