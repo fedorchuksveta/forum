@@ -21,6 +21,8 @@ public class UserService {
     ThemeRepository themeRepository;
 
 
+
+
     public User getOne(Long id) {
         return userRepository.findById(id).orElse(null);
     }
@@ -52,8 +54,8 @@ public class UserService {
 //        return resolved;
 //    }
 
-    public Optional<User> findUserByNickName(String nickName) {
-        Optional<User> user = userRepository.findByNickName(nickName);
+    public Optional<User> findUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
 
         return user;
     }

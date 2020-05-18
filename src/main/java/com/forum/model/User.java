@@ -18,7 +18,7 @@ public class User {
 
     private String firstName;
     private String surName;
-    private String nickName;
+    private String username;
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)

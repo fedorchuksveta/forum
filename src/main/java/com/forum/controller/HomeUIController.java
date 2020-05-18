@@ -2,6 +2,9 @@ package com.forum.controller;
 
 import com.forum.model.User;
 import com.forum.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,9 +16,11 @@ import javax.validation.Valid;
 
 
 @Controller
+@Slf4j
 public class HomeUIController {
 
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     private final UserService userService;
     private static final String SUCCESSFULLY_REGISTERED_MESSAGE = "Користувача вдало зареєстровано!";
     private static final String NICK_NAME_ALREADY_USED_MESSAGE = "Дане ім'я вже використовується";
@@ -45,21 +50,23 @@ public class HomeUIController {
             return "registration";
         }
 
+        log.info("User information: {}", user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userService.create(user);
 
         model.addAttribute("successMessage", SUCCESSFULLY_REGISTERED_MESSAGE);
         model.addAttribute("user", user);
-        return "themePage";
+        return "home";
     }
 
 
     private boolean userExists(User user, BindingResult bindingResult) {
-        boolean resultNickName = userService.findUserByNickName(user.getNickName()).isPresent();
-        if (resultNickName) {
-            bindingResult.rejectValue("nickName", "error.user", NICK_NAME_ALREADY_USED_MESSAGE);
+        boolean isUserPresent = userService.findUserByUsername(user.getUsername()).isPresent();
+        if (isUserPresent) {
+            bindingResult.rejectValue("username", "error.user", NICK_NAME_ALREADY_USED_MESSAGE);
         }
 
-        return resultNickName;
+        return isUserPresent;
     }
 
 }

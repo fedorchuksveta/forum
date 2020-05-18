@@ -1,15 +1,11 @@
 package com.forum.controller;
 
 import com.forum.model.Theme;
-import com.forum.model.User;
 import com.forum.service.ThemeService;
-import com.forum.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -21,6 +17,11 @@ public class ThemeController {
 
     public ThemeController(ThemeService themeService) {
         this.themeService = themeService;
+    }
+
+    @GetMapping
+    public String getThemePage(Principal principal) {
+        return "Hello, " + principal.getName();
     }
 
     @GetMapping("{id}")
