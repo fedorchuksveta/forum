@@ -2,6 +2,7 @@ package com.forum.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -25,9 +26,11 @@ public class Theme {
 
 
     @ManyToMany(mappedBy = "themeSet")
+    @ToString.Exclude
     private Set<User> userSet;
 
     @OneToMany(mappedBy="theme")
+    @ToString.Exclude
     private Set<Topic> topicSet;
 
 }

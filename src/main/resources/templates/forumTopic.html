@@ -17,14 +17,14 @@
         </tr>
 
         <tr th:each="c : ${comments}">
-            <td th:text="${c.name}"></td>
+            <td th:text="${c.description}"></td>
 
 <!--            <td>-->
 <!--                <a th:href="@{/topic/topic/__${t.id}__}" class="btn btn-danger">Перейти до обговорення</a>-->
 <!--            </td>-->
         </tr>
 
-        <a th:href="@{/topic/addComment/__${topicId}__}" class="btn btn-danger">Додати коментар</a>
+        <a th:href="@{/comment/addComment/__${topicId}__}" class="btn btn-danger">Додати коментар</a>
 
         </tbody>
     </table>

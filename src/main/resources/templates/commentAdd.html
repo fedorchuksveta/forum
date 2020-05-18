@@ -8,7 +8,7 @@
     <body>
     <h1>Створення коментаря:</h1>
 
-    <form th:action="@{/topic/addComment/__${comment.topic.id}__}"
+    <form th:action="@{/comment/addComment/__${comment.topic.id}__}"
           th:object="${comment}" method="POST">
         NameTopic:
         <a th:text="${comment.topic.name}">
@@ -19,7 +19,7 @@
         Description:
         <input type="text" th:field="*{description}"/>
 
-        <a th:href="@{/topic/addComment/__${comment.topic.id}__}"></a>
+        <a th:href="@{/comment/addComment/__${comment.topic.id}__}"></a>
         <!--        <input type="text" th:field="*{getTheme()}"/>-->
 
         <input type="submit" value="Create"/>

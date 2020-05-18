@@ -3,7 +3,6 @@ package com.forum.controller;
 import com.forum.model.Comment;
 import com.forum.model.Theme;
 import com.forum.model.Topic;
-import com.forum.model.User;
 import com.forum.service.CommentService;
 import com.forum.service.ThemeService;
 import com.forum.service.TopicService;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -29,7 +27,8 @@ public class TopicController {
 
     private final ThemeService themeService;
 
-    public TopicController(TopicService topicService, UserService userService, CommentService commentService, ThemeService themeService) {
+    public TopicController(TopicService topicService, UserService userService, CommentService commentService,
+                           ThemeService themeService) {
         this.topicService = topicService;
         this.userService = userService;
         this.commentService = commentService;
@@ -38,7 +37,7 @@ public class TopicController {
 
     @GetMapping("/addTopic/{id}")
     public String addTopic(Model model, @PathVariable String id) {
-        Theme theme = themeService.findThemeById(Long.parseLong(id));
+            Theme theme = themeService.findThemeById(Long.parseLong(id));
         Topic topic = new Topic();
         topic.setTheme(theme);
         model.addAttribute("topic", topic);
@@ -61,27 +60,4 @@ public class TopicController {
         model.addAttribute("topicId", id);
         return "forumTopic";
     }
-
-    @GetMapping("/addComment/{id}")
-    public String addComment(Model model, @PathVariable Long id, Principal principal) {
-        Topic topic = topicService.findTopicById(id);
-        User user = userService.findUserByFirstName(principal.getName());
-        Comment comment = new Comment();
-        comment.setTopic(topic);
-        comment.setUser(user);
-        model.addAttribute("comment", comment);
-        return "commentAdd";
-    }
-
-    @PostMapping("/addComment/{id}")
-    public String saveComment(Model model, @PathVariable Long id,
-                                   @ModelAttribute("comment") Comment comment, Principal principal) {
-        Topic topic = topicService.findTopicById(id);
-        User user = userService.findUserByFirstName(principal.getName());
-        comment.setTopic(topic);
-        comment.setUser(user);
-        commentService.create(comment);
-        return "redirect:/topic/topic/{id}";
-    }
-
 }

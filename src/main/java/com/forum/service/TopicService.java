@@ -33,8 +33,8 @@ public class TopicService {
         }
     }
 
-    public Topic findTopicById(long id) {
-        return topicRepository.findTopicById(id);
+    public Optional<Topic> findById(long id) {
+        return topicRepository.findById(id);
     }
 
     public Topic create(Topic topic) {
