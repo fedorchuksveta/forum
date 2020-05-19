@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+
+  forum-webapp:
+    image: forum
+    networks:
+      - forum-network
+    ports:
+      - 8080:8080
+    depends_on:
+      - forum-database
+
+  forum-database:
+    image: mysql:5
+    networks:
+      - forum-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=forum
+
+networks:
+  forum-network:
