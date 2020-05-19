@@ -1,26 +1,36 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Add Theme</title>
 </head>
-<div align="center">
-    <body>
-    <h1>Створення теми:</h1>
 
-    <form th:action="@{/theme/addTheme}"
-          th:object="${theme}" method="POST">
-        Name:
-        <input type="text" th:field="*{name}"/>
-        <br/>
-        Description:
-        <input type="text" th:field="*{description}"/>
+<body>
+<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <form th:action="@{/theme/new}" method="post">
+        <div align="center">
+            <h1>Будь ласка, додайте дані!</h1>
 
-        <input type="submit" value="Create"/>
+            <div class="form-group">
+                <input type="text" name="name" id="name" class="form-control input-lg"
+                       placeholder="Name" required="true" autofocus="true"/>
+            </div>
+            <div class="form-group">
+                <input type="descriotion" name="descriotion" id="descriotion" class="form-control input-lg"
+                       placeholder="Descriotion" required="true"/>
+            </div>
 
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Підтвердити"/>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                </div>
+            </div>
+
+        </div>
     </form>
-
-    <br/>
-    </body>
 </div>
+
+</body>
 </html>

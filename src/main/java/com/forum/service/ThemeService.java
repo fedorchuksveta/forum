@@ -1,9 +1,7 @@
 package com.forum.service;
 
-
 import com.forum.model.Theme;
 import com.forum.repository.ThemeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +10,11 @@ import java.util.Optional;
 @Service
 public class ThemeService {
 
+    private final ThemeRepository themeRepository;
 
-    @Autowired
-    ThemeRepository themeRepository;
+    public ThemeService(ThemeRepository themeRepository) {
+        this.themeRepository = themeRepository;
+    }
 
 
     public Theme getOne(Long id) {
@@ -28,9 +28,7 @@ public class ThemeService {
 
     public void delete(Long id) {
         Optional<Theme> toDelete = themeRepository.findById(id);
-        if (toDelete.isPresent()) {
-            themeRepository.delete(toDelete.get());
-        }
+        toDelete.ifPresent(themeRepository::delete);
     }
 
     public Theme update(Theme theme) {
@@ -41,11 +39,9 @@ public class ThemeService {
             newTheme.setName(theme.getName());
             newTheme.setDescription(theme.getDescription());
             newTheme = themeRepository.save(newTheme);
-
             return newTheme;
         } else {
             theme = themeRepository.save(theme);
-
             return theme;
         }
     }

@@ -1,6 +1,5 @@
 package com.forum.model;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -23,18 +22,14 @@ public class Topic {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="theme_id", nullable=false)
+    @JoinColumn(name = "theme_id", nullable = false)
     private Theme theme;
-
-
-//    @ManyToOne
-//    private Theme theme;
 
     @ManyToMany(mappedBy = "topicSet")
     @ToString.Exclude
     private Set<User> userSet;
 
-    @OneToMany(mappedBy="topic")
+    @OneToMany(mappedBy = "topic")
     @ToString.Exclude
     private List<Comment> commentList;
 }

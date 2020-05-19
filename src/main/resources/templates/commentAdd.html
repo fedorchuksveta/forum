@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Add Comment</title>
@@ -8,24 +8,20 @@
     <body>
     <h1>Створення коментаря:</h1>
 
-    <form th:action="@{/comment/addComment/__${comment.topic.id}__}"
-          th:object="${comment}" method="POST">
-        NameTopic:
-        <a th:text="${comment.topic.name}">
-        </a>
-<!--        User:-->
-<!--        <a th:text="${comment.user.firstName}">-->
-<!--        </a>-->
-        Description:
-        <input type="text" th:field="*{description}"/>
+        <form th:action="@{/comment/__${comment.topic.id}__}"
+              th:object="${comment}" method="POST">
+            Назва топіка:
+            <div th:text="${comment.topic.name}">
+            </div>
+            Коментар:
+            <input type="text" th:field="*{description}"/>
 
-        <a th:href="@{/comment/addComment/__${comment.topic.id}__}"></a>
-        <!--        <input type="text" th:field="*{getTheme()}"/>-->
+            <a th:href="@{/comment/__${comment.topic.id}__}"></a>
 
-        <input type="submit" value="Create"/>
+            <input type="submit" value="Створити"/>
 
-    </form>
+        </form>
 
-    <br/>
+        <br/>
     </body>
 </div>
