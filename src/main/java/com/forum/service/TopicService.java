@@ -18,21 +18,6 @@ public class TopicService {
         return topicRepository.findByThemeId(id);
     }
 
-    public Topic getOne(Long id) {
-        return topicRepository.findById(id).orElse(null);
-    }
-
-    public List<Topic> findAll() {
-        return topicRepository.findAll();
-    }
-
-    public void delete(Long id) {
-        Optional<Topic> toDelete = topicRepository.findById(id);
-        if (toDelete.isPresent()) {
-            topicRepository.delete(toDelete.get());
-        }
-    }
-
     public Optional<Topic> findById(long id) {
         return topicRepository.findById(id);
     }

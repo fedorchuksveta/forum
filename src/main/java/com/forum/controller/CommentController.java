@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/comment")
@@ -26,9 +27,10 @@ public class CommentController {
         this.userService = userService;
     }
 
-    @GetMapping("/addComment/{id}")
+    @GetMapping("/{id}")
     public String addComment(Model model, @PathVariable Long id, Principal principal) {
-        Topic topic = topicService.findById(id).get();
+        Topic topic = topicService.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Not found topic with id: " + id));
         User user = userService.findUserByFirstName(principal.getName());
         Comment comment = new Comment();
         comment.setTopic(topic);
@@ -37,15 +39,16 @@ public class CommentController {
         return "commentAdd";
     }
 
-    @PostMapping("/addComment/{id}")
-    public String saveComment(Model model, @PathVariable Long id,
+    @PostMapping("/{id}")
+    public String saveComment(@PathVariable Long id,
                               @ModelAttribute("comment") Comment comment, Principal principal) {
-        Topic topic = topicService.findById(id).get();
+        Topic topic = topicService.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Not found topic with id: " + id));
         User user = userService.findUserByFirstName(principal.getName());
         comment.setTopic(topic);
         comment.setUser(user);
         commentService.create(comment);
-        return "redirect:/topic/topic/{id}";
+        return "redirect:/topic/{id}/forum";
     }
 
 }

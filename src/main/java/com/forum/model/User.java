@@ -39,7 +39,7 @@ public class User {
     @ToString.Exclude
     private Set<Theme> themeSet;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private List<Comment> commentList;
 }

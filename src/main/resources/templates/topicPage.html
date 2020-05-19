@@ -2,17 +2,22 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Topic's page</title>
+    <title>Topic page</title>
 </head>
+
 <div align="center">
+    <h1>Виберіть, що саме Вас цікавить:</h1>
+
     <table border="2" cellpadding="5">
         <thead>
         <th>Найменування топіка</th>
+        <th>Опис топіка</th>
+        <th>Перейти до обговорення</th>
         </thead>
 
         <tbody>
 
-        <h th:text="${themeId}"></h>
+        </tr>
         <tr th:if="${topics.isEmpty()}">
             <td colspan="2"> Немає створених топіків</td>
         </tr>
@@ -20,19 +25,26 @@
         <tr th:each="t : ${topics}">
             <td th:text="${t.name}"></td>
 
+            <td th:text="${t.description}"></td>
             <td>
-                <a th:href="@{/topic/topic/__${t.id}__}" class="btn btn-danger">Перейти до обговорення</a>
+                <form th:action="@{/topic/__${t.id}__/forum}" method="get" class="btn btn-danger">
+                    <button>Go</button>
+                </form>
             </td>
         </tr>
-        <a th:href="@{/topic/addTopic/__${themeId}__}" class="btn btn-danger">Додати топік</a>
-<!--        <input type="button" th:href="@{/topic/addTopic/__${themeId}__}" value="Додати топік"/>-->
-
-
         </tbody>
+
     </table>
+    <th>
+
+    </th>
+    <tr>
+        <form th:action="@{/topic/__${themeId}__}" method="get" class="btn btn-danger">
+            <button>Додати топік</button>
+        </form>
+    </tr>
+
 </div>
 
 </body>
 </html>
-
-

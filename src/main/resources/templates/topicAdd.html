@@ -8,19 +8,19 @@
     <body>
     <h1>Створення топіка:</h1>
 
-    <form th:action="@{/topic/addTopic/__${topic.theme.id}__}"
+    <form th:action="@{/topic/__${topic.theme.id}__}"
           th:object="${topic}" method="POST">
-        Theme:
-        <a th:text="${topic.theme.name}">
-        </a>
+        Тема:
+        <div th:text="${topic.theme.name}">
+        </div>
 
-        Name:
+        Ім'я:
         <input type="text" th:field="*{name}"/>
         <br/>
-        Description:
+        Опис:
         <input type="text" th:field="*{description}"/>
 
-        <a th:href="@{/topic/addTopic/__${topic.theme.id}__}"></a>
+        <a th:href="@{/topic/__${topic.theme.id}__}"></a>
 <!--        <input type="text" th:field="*{getTheme()}"/>-->
 
         <input type="submit" value="Create"/>

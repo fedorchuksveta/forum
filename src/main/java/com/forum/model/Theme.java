@@ -20,16 +20,11 @@ public class Theme {
     private String description;
     private String name;
 
-
-//    @OneToMany
-//    private Topic topic;
-
-
     @ManyToMany(mappedBy = "themeSet")
     @ToString.Exclude
     private Set<User> userSet;
 
-    @OneToMany(mappedBy="theme")
+    @OneToMany(mappedBy = "theme")
     @ToString.Exclude
     private Set<Topic> topicSet;
 

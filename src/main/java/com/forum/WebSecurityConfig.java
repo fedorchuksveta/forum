@@ -39,7 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
                 );
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -62,18 +61,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-
         http
                 .authorizeRequests()
                 .antMatchers("/", "/registration/**", "/home")
                 .permitAll()
-//                .antMatchers("/home/**")
-//                .hasAnyAuthority()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
                 .formLogin().loginPage("/login").permitAll()
-                .defaultSuccessUrl("/theme/themePage", true)
+                .defaultSuccessUrl("/theme", true)
                 .failureUrl("/login?error=True")
                 .usernameParameter("username")
                 .passwordParameter("password")

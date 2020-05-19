@@ -8,10 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/theme")
@@ -28,60 +27,53 @@ public class ThemeController {
     private final TopicService topicService;
 
 
-    @GetMapping("/themePage")
+    @GetMapping
     public String homePage(Model model) {
         List<Theme> themes = themeService.findAll();
         model.addAttribute("themes", themes);
         return "themePage";
     }
 
-    @GetMapping("/addTheme")
+    @GetMapping("/new")
     public String addTheme(Model model) {
         Theme theme = new Theme();
         model.addAttribute("theme", theme);
         return "themeAdd";
     }
 
-    @PostMapping("/addTheme")
-    public String savePresentation(Model model,
-                                   @ModelAttribute("theme") Theme theme) {
+    @PostMapping("/new")
+    public String savePresentation(@ModelAttribute("theme") Theme theme) {
         themeService.create(theme);
-        return "redirect:/theme/themePage";
+        return "redirect:/theme";
     }
 
-    @GetMapping("{id}")
-    public Theme getOne(@PathVariable Long id) {
-        return themeService.getOne(id);
-    }
+    @GetMapping("/{id}/edit")
+    public String editThemeById(Model model, @PathVariable("id") Long id) {
 
-    @GetMapping("/editTheme/{id}")
-    public String editThemeById(Model model, @PathVariable("id") Optional<Long> id) {
-
-        Theme theme = themeService.getOne(id.get());
+        Theme theme = themeService.getOne(id);
         model.addAttribute("theme", theme);
 
         return "themeEdit";
     }
 
-    @PostMapping("/editTheme")
+    @PostMapping
     public String editThemeById(Theme theme) {
         themeService.update(theme);
-        return "redirect:/theme/themePage";
+        return "redirect:/theme";
     }
 
-    @GetMapping("/deleteTheme/{id}")
-    public String deleteThemeById(@PathVariable Long id) {
+    @GetMapping("/{id}/delete")
+    public String deleteThemeById(RedirectAttributes attributes, @PathVariable Long id) {
+        List<Topic> topics = topicService.findAllByTheme(id);
+        if (!topics.isEmpty()) {
+            attributes.addFlashAttribute("error", "Theme can't be deleted, because has topics");
+            return "redirect:/theme";
+        }
         themeService.delete(id);
-        return "redirect:/theme/themePage";
+        return "redirect:/theme";
     }
-//
-//    @PostMapping("/deleteTheme")
-//    public String deleteThemeById(Theme theme) {
-//
-//        return "redirect:/theme/themePage";
-//    }
 
-    @GetMapping("/topicTheme/{id}")
+    @GetMapping("/{id}/topic")
     public String getTaken(@PathVariable Long id, Model model) {
         List<Topic> topics = topicService.findAllByTheme(id);
         model.addAttribute("topics", topics);
